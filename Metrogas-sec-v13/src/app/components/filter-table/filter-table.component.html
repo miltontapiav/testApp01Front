@@ -1,0 +1,39 @@
+<!--<div class="buscador-container-btn">
+    <button class="logout" (click)="logout()">Cerrar Sesión</button>
+</div>-->
+<div class="buscador-container">
+    <div style="font-size: 24px; color: #f7f7f7;">
+        {{ formattedCountdown }} <span style="font-size: 16px; color: #f7f7f7;"><---- Tiempo para que termine tu sesión</span>
+    </div>
+    <form>
+        <label>
+            Número de Cliente:
+            <input type="text" name="nroCliente" #nroCliente="ngModel" [(ngModel)]="Modelo.nroCliente" pattern="[0-9]+" (input)="showAlert(nroCliente)">
+        </label>
+    <!--
+        <label>
+            Estado Cumplimiento:
+            <input type="text" name="estado" #estado="ngModel" [(ngModel)]="Modelo.estado" pattern="[0-9]{1,2}" (input)="showAlert(estado)">
+        </label>
+    -->
+        <label>
+            Estado Cumplimiento:
+            <select name="estado" [(ngModel)]="Modelo.estado" (input)="showAlert(nroCliente)">
+                <option *ngFor="let option of estadoOptions" [value]="option.value">{{ option.label }}</option>
+            </select>
+        </label>
+        
+        
+        <label>Fecha Inicio (Fecha Oficio Resolución):
+            <input type="date" name="fechaInicio" #fechaInicio min="2022-01-01" onkeydown="return false" />
+        </label>
+    
+        <label>Fecha Fin (Fecha Cumplimiento):
+            <input type="date" name="fechaFin" #fechaFin min="2022-01-01" onkeydown="return false"/>
+        </label>
+
+        <div class="button-container">
+            <input type="submit" class="filtrar" value="Filtrar" (click)="enviarDatosAlDashboard(fechaInicio.value, fechaFin.value, nroCliente.value)">
+        </div>
+    </form>
+</div>
